@@ -13,12 +13,15 @@ public class Inventory {
             String line;
             ArrayList<String> inputCommand;
 
+            // Redirect output to the output text file
+            PrintStream fileStream = new PrintStream(outputFileName);
+            System.setOut(fileStream);
+
             FileReader inputFileReader = new FileReader(inputFileName);
             BufferedReader inputBufferedReader = new BufferedReader(inputFileReader);
 
             while ((line = inputBufferedReader.readLine()) != null) {
                 inputCommand = cleanInputCommand(line);
-                System.out.println(inputCommand);
                 execute(db, inputCommand);
             }
             System.out.println("DONE!!!!");
@@ -52,7 +55,7 @@ public class Inventory {
                 Functions.add(db, inputCommand);
                 break;
             case "STATUS":
-                Functions.status(db);
+                Functions.status(db, inputCommand);
                 break;
             case "BUY":
                 Functions.buy(db, inputCommand);
@@ -69,11 +72,14 @@ public class Inventory {
             case "LOAD":
                 Functions.load(db, inputCommand);
                 break;
+            case "CLEAR":
+                Functions.clear(db, inputCommand);
+                break;
             case "SEARCH":
                 Functions.search(db, inputCommand);
                 break;
             default:
-                System.out.println(function + " command not found.");
+                System.out.println("MAIN: UNKNOWN_COMMAND");
         }
 
     }
