@@ -34,6 +34,11 @@ public class Inventory {
         }
     }
 
+    /**
+     * Clean the input command and return an ArrayList representation of the input.
+     * @param inputCommand: String, input command
+     * @return ArrayList, cleaned input command
+     */
     private static ArrayList<String> cleanInputCommand(String inputCommand) {
         ArrayList<String>cleanedCommand = new ArrayList<>();
 
@@ -47,6 +52,11 @@ public class Inventory {
         return cleanedCommand;
     }
 
+    /**
+     * Match and execute the input command.
+     * @param db: Database, HashMap database
+     * @param inputCommand: ArrayList<String> input command
+     */
     private static void execute(Database db, ArrayList<String> inputCommand) {
         String function = inputCommand.get(0);
 
