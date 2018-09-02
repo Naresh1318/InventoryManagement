@@ -4,13 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 class Functions {
-    /**
-     *
-     * @param db
-     * @param inputCommand
-     */
     private final static String DATE_FORMAT = "MM/dd/yyyy";
 
+    /**
+     * Add entry to database.
+     * @param db: Database, HashMap database
+     * @param inputCommand: ArrayList<String> input command
+     */
     static void add(Database db, ArrayList<String> inputCommand) {
         if (inputCommand.size() != 4) {
             System.out.println("ADD: ERROR WRONG_ARGUMENT_COUNT");
@@ -35,8 +35,8 @@ class Functions {
     }
 
     /**
-     *
-     * @param db
+     * Print/Write database status
+     * @param db: Database, HashMap database
      */
     static void status(Database db, ArrayList<String> inputCommand) {
         if (inputCommand.size() != 1) {
@@ -53,9 +53,9 @@ class Functions {
     }
 
     /**
-     *
-     * @param db
-     * @param inputCommand
+     * Buy item. Increase the stock if found and on valid input.
+     * @param db: Database, HashMap database
+     * @param inputCommand: ArrayList<String> input command
      */
     static void buy(Database db, ArrayList<String>inputCommand) {
         int itemIndex = 0;
@@ -101,9 +101,9 @@ class Functions {
     }
 
     /**
-     *
-     * @param db
-     * @param inputCommand
+     * Sell item from the database. Reduce the stock if found and on valid input.
+     * @param db: Database, HashMap database
+     * @param inputCommand: ArrayList<String> input command
      */
     static void sell(Database db, ArrayList<String>inputCommand) {
         int itemIndex = 0;
@@ -154,6 +154,11 @@ class Functions {
         System.out.println("SELL: OK " + itemEntry.get(1) + " " + itemEntry.get(2) + " " + itemEntry.get(3));
     }
 
+    /**
+     * Query the database.
+     * @param db: Database, HashMap database
+     * @param inputCommand: ArrayList<String> input command
+     */
     static void quan(Database db, ArrayList<String>inputCommand) {
         String operation = inputCommand.get(1);
         switch (operation) {
@@ -171,6 +176,11 @@ class Functions {
         }
     }
 
+    /**
+     * Query and display all entries greater than the input.
+     * @param db: Database, HashMap database
+     * @param inputCommand: ArrayList<String> input command
+     */
     private static void greater(Database db, ArrayList<String>inputCommand) {
         boolean itemFound = false;
         ArrayList<String>itemIndex = new ArrayList<>();
@@ -210,6 +220,11 @@ class Functions {
         }
     }
 
+    /**
+     * Query and display all entries lesser than the input.
+     * @param db: Database, HashMap database
+     * @param inputCommand: ArrayList<String> input command
+     */
     private static void fewer(Database db, ArrayList<String>inputCommand) {
         boolean itemFound = false;
         ArrayList<String>itemIndex = new ArrayList<>();
@@ -249,6 +264,11 @@ class Functions {
         }
     }
 
+    /**
+     * Query and display all entries strictly between the input.
+     * @param db: Database, HashMap database
+     * @param inputCommand: ArrayList<String> input command
+     */
     private static void between(Database db, ArrayList<String>inputCommand) {
         boolean itemFound = false;
         ArrayList<String>itemIndex = new ArrayList<>();
@@ -290,19 +310,39 @@ class Functions {
         }
     }
 
+    /**
+     * Save the database as a CSV file.
+     * @param db: Database, HashMap database
+     * @param inputCommand: ArrayList<String> input command
+     */
     static void store(Database db, ArrayList<String>inputCommand) {
         db.convertToCSV(inputCommand.get(1));
     }
 
+    /**
+     * Load the database from a CSV file.
+     * @param db: Database, HashMap database
+     * @param inputCommand: ArrayList<String> input command
+     */
     static void load(Database db, ArrayList<String> inputCommand) {
         db.loadFromCSV(inputCommand.get(1));
     }
 
+    /**
+     * Clear the database.
+     * @param db: Database, HashMap database
+     * @param inputCommand: ArrayList<String> input command
+     */
     static void clear(Database db, ArrayList<String> inputCommand) {
         db.database.clear();
         System.out.println("CLEAR: OK");
     }
 
+    /**
+     * Search the database for Name/Company.
+     * @param db: Database, HashMap database
+     * @param inputCommand: ArrayList<String> input command
+     */
     static void search(Database db, ArrayList<String> inputCommand) {
         boolean itemFound = false;
         ArrayList<String>itemIndex = new ArrayList<>();
@@ -332,6 +372,11 @@ class Functions {
         }
     }
 
+    /**
+     * Check if a database entry is already present.
+     * @param db: Database, HashMap database
+     * @param databaseEntry: ArrayList<String> input database entry
+     */
     private static boolean checkDuplicates(Database db, ArrayList<String> databaseEntry) {
         for (String key: db.database.keySet()) {
             if (db.database.get(key).subList(0, 2).equals(databaseEntry.subList(0, 2))) {
@@ -341,6 +386,11 @@ class Functions {
         return false;
     }
 
+    /**
+     * Check if the data is in the correct format.
+     * @param date: String, input data string
+     * @return boolean
+     */
     private static boolean checkDate(String date)
     {
         try {

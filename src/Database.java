@@ -1,11 +1,16 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
-public class Database {
-    public HashMap<String, ArrayList<String>>database = new HashMap<>();
+class Database {
+    HashMap<String, ArrayList<String>>database = new HashMap<>();
 
-    public void convertToCSV(String fileName) {
+    /**
+     * Convert the database into a CSV file.
+     * @param fileName: String, CSV file name
+     */
+    void convertToCSV(String fileName) {
         try {
             FileWriter fileWriter = new FileWriter(fileName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -21,7 +26,11 @@ public class Database {
         System.out.println("STORE: OK " + database.size());
     }
 
-    public void loadFromCSV(String fileName) {
+    /**
+     * Clear existing database and load from CSV file.
+     * @param fileName: String, CSV file name
+     */
+    void loadFromCSV(String fileName) {
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -30,10 +39,7 @@ public class Database {
             String line = bufferedReader.readLine();
             while (line != null) {
                 String[] lineRead = line.split(",");
-                ArrayList<String> databaseEntry = new ArrayList<>();
-                for (int j=0; j<4; j++) {
-                    databaseEntry.add(lineRead[j]);
-                }
+                ArrayList<String> databaseEntry = new ArrayList<>(Arrays.asList(lineRead).subList(0, 4));
                 database.put(Integer.toString(i), databaseEntry);
                 line = bufferedReader.readLine();
                 i++;
