@@ -24,7 +24,6 @@ public class Inventory {
                 inputCommand = cleanInputCommand(line);
                 execute(db, inputCommand);
             }
-            System.out.println("DONE!!!!");
         }
         catch (FileNotFoundException fx) {
             System.out.println("Input file not found: " + inputFileName);
